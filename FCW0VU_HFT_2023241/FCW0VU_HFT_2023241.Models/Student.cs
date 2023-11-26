@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Models
 {
-    internal class Student
+    public class Student
     {
         [Key]
         public int StudentId { get; set; }
