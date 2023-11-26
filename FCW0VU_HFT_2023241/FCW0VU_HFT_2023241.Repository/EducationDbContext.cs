@@ -28,6 +28,16 @@ namespace FCW0VU_HFT_2023241.Repository
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Student>(x => x.
+            HasOne<University>().WithMany().
+            HasForeignKey(x => x.UniversityID).
+            OnDelete(DeleteBehavior.Cascade));
+
+            modelBuilder.Entity<Student>(x => x.
+            HasOne<Course>().WithMany().
+            HasForeignKey(x => x.CourseID).
+            OnDelete(DeleteBehavior.Cascade));
+
             modelBuilder.Entity<University>().HasData(
                 new University("1#Eötvös Loránd Egyetem#Budapest#1635#30000"),
                 new University("2#Pécsi Tudományegyetem#Pécs#1367#20000"),
