@@ -8,15 +8,21 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Models
 {
-    public class Course
+    internal class Student
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CourseID { get; set; }
+        public int StudentId { get; set; }
 
         [StringLength(240)]
         public string Name { get; set; }
 
-        public int Credit { get; set; }
+        [StringLength(6)]
+        public string Neptun { get; set; }
+
+        [ForeignKey(nameof(University))]
+        public int UniversityID { get; set; }
+
+        [ForeignKey(nameof(Course))]
+        public int CourseID { get; set; }
     }
 }
