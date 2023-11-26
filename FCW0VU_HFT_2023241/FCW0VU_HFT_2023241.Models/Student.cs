@@ -11,7 +11,7 @@ namespace FCW0VU_HFT_2023241.Models
     public class Student
     {
         [Key]
-        public int StudentId { get; set; }
+        public int StudentID { get; set; }
 
         [StringLength(240)]
         public string Name { get; set; }
@@ -24,5 +24,21 @@ namespace FCW0VU_HFT_2023241.Models
 
         [ForeignKey(nameof(Course))]
         public int CourseID { get; set; }
+
+        public Student() { }
+        
+        public Student(int studentID, string name, string neptun)
+        {
+            StudentID = studentID;
+            Name = name;
+            Neptun = neptun;
+        }
+
+        public Student(string data)
+        {
+            StudentID = int.Parse(data.Split('#')[0]);
+            Name = data.Split('#')[1];
+            Neptun = data.Split('#')[2];
+        }
     }
 }

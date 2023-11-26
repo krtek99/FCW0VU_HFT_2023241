@@ -18,5 +18,21 @@ namespace FCW0VU_HFT_2023241.Models
         public string Name { get; set; }
 
         public int Credit { get; set; }
+
+        public Course() { }
+
+        public Course(int courseID, string name, int credit)
+        {
+            CourseID = courseID;
+            Name = name;
+            Credit = credit;
+        }
+
+        public Course(string data)
+        {
+            CourseID = int.Parse(data.Split('#')[0]);
+            Name = data.Split('#')[1];
+            Credit = int.Parse(data.Split('#')[2]);
+        }
     }
 }
