@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Models
 {
-    internal interface IEntity<TId>
+    public interface IEntity<TId>
     {
         TId Id { get; set; }
     }
