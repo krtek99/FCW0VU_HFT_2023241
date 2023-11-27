@@ -9,9 +9,9 @@ namespace FCW0VU_HFT_2023241.Repository
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
-        protected EducationDbContext ctx;
+        protected HRDbContext ctx;
 
-        public Repository(EducationDbContext ctx)
+        public Repository(HRDbContext ctx)
         {
             this.ctx = ctx ?? throw new ArgumentNullException(nameof(ctx));
         }

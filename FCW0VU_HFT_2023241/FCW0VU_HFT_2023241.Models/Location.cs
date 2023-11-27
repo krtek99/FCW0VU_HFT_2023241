@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Models
 {
-    [Table("Courses")]
-    public class Course : Entity
+    [Table("Locations")]
+    public class Location : Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,22 +19,24 @@ namespace FCW0VU_HFT_2023241.Models
         [StringLength(240)]
         public string Name { get; set; }
 
-        public int Credit { get; set; }
+        public string Address { get; set; }
 
-        public Course() { }
+        public Location() { }
 
-        public Course(int courseID, string name, int credit)
+        [NotMapped]
+        public virtual ICollection<Department> Departments { get; set; }
+        public Location(int courseID, string name, string address)
         {
             Id = courseID;
             Name = name;
-            Credit = credit;
+            Address = address;
         }
 
-        public Course(string data)
+        public Location(string data)
         {
             Id = int.Parse(data.Split('#')[0]);
             Name = data.Split('#')[1];
-            Credit = int.Parse(data.Split('#')[2]);
+            Address = data.Split('#')[2];
         }
     }
 }

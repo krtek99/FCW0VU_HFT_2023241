@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository.Repositories
 {
-    internal class UniversityRepository : Repository<University>, IUniversityRepository
+    internal class LocationRepository : Repository<Location>, ILocationRepository
     {
-        public UniversityRepository(EducationDbContext ctx) : base(ctx)
+        public LocationRepository(HRDbContext ctx) : base(ctx)
         {
         }
     }

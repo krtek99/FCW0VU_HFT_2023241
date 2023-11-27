@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository
 {
-    public interface IStudentRepository : IRepository<Student>
+    public interface IEmployeeRepository : IRepository<Employee>
     {
         //declare non-crud methods here
     }

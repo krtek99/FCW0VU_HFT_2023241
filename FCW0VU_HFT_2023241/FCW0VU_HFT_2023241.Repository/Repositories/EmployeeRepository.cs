@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository
 {
-    public interface IUniversityRepository : IRepository<University>
+    public class EmployeeRepository : Repository<Employee>, IEmployeeRepository
     {
-        //declare non-crud methods here
+        public EmployeeRepository(HRDbContext ctx) : base(ctx) { }
     }
 }

@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository.Repositories
 {
-    internal class CourseRepository : Repository<Course>, ICourseRepository
+    internal class DepartmentRepository : Repository<Department>, IDepartmentRepository
     {
-        public CourseRepository(EducationDbContext ctx) : base(ctx)
+        public DepartmentRepository(HRDbContext ctx) : base(ctx)
         {
         }
     }

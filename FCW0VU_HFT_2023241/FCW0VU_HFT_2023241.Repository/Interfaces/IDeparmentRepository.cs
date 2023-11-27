@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository.Interfaces
 {
-    internal interface ICourseRepository : IRepository<Course>
+    internal interface IDepartmentRepository : IRepository<Department>
     {
         //declare non-crud methods here
     }

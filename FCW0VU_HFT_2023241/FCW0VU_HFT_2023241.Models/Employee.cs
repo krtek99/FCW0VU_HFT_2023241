@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Models
 {
-    [Table("Students")]
-    public class Student : Entity
+    [Table("Employees")]
+    public class Employee : Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,30 +18,28 @@ namespace FCW0VU_HFT_2023241.Models
 
         [StringLength(240)]
         public string Name { get; set; }
+        public int Salary { get; set; }
 
-        [StringLength(6)]
-        public string Neptun { get; set; }
+        [ForeignKey(nameof(Department))]
+        public int DepartmentId { get; set; }
 
-        [ForeignKey(nameof(University))]
-        public int UniversityID { get; set; }
+        [NotMapped]
+        public virtual Department Department { get; set; }
 
-        [ForeignKey(nameof(Course))]
-        public int CourseID { get; set; }
-
-        public Student() { }
+        public Employee() { }
         
-        public Student(int studentID, string name, string neptun)
+        public Employee(int studentID, string name, int salary)
         {
             Id = studentID;
             Name = name;
-            Neptun = neptun;
+            Salary = salary;
         }
 
-        public Student(string data)
+        public Employee(string data)
         {
             Id = int.Parse(data.Split('#')[0]);
             Name = data.Split('#')[1];
-            Neptun = data.Split('#')[2];
+            Salary = int.Parse(data.Split('#')[2]);
         }
     }
 }

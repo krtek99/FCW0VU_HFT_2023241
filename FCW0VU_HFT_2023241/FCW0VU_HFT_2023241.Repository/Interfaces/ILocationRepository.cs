@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository
 {
-    public class StudentRepository : Repository<Student>, IStudentRepository
+    public interface ILocationRepository : IRepository<Location>
     {
-        public StudentRepository(EducationDbContext ctx) : base(ctx) { }
+        //declare non-crud methods here
     }
 }
