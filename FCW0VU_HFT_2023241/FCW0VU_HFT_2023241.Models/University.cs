@@ -9,11 +9,12 @@ using System.Xml.Linq;
 
 namespace FCW0VU_HFT_2023241.Models
 {
-    public class University
+    [Table("Universities")]
+    public class University : Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int UniversityID { get; set; }
+        public override int Id { get; set; }
 
         [StringLength(240)]
         public string Name { get; set; }
@@ -29,7 +30,7 @@ namespace FCW0VU_HFT_2023241.Models
 
         public University(int universityID, string name, string location, int founding_Date, int student_Count)
         {
-            UniversityID = universityID;
+            Id = universityID;
             Name = name;
             Location = location;
             Founding_Date = founding_Date;
@@ -38,7 +39,7 @@ namespace FCW0VU_HFT_2023241.Models
 
         public University(string data)
         {
-            UniversityID = int.Parse(data.Split('#')[0]);
+            Id = int.Parse(data.Split('#')[0]);
             Name = data.Split('#')[1];
             Location = data.Split('#')[2];
             Founding_Date = int.Parse(data.Split('#')[3]);

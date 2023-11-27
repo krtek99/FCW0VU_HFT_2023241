@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Models
 {
-    public class Course
+    [Table("Courses")]
+    public class Course : Entity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CourseID { get; set; }
+        public override int Id { get; set; }
 
         [StringLength(240)]
         public string Name { get; set; }
@@ -23,14 +24,14 @@ namespace FCW0VU_HFT_2023241.Models
 
         public Course(int courseID, string name, int credit)
         {
-            CourseID = courseID;
+            Id = courseID;
             Name = name;
             Credit = credit;
         }
 
         public Course(string data)
         {
-            CourseID = int.Parse(data.Split('#')[0]);
+            Id = int.Parse(data.Split('#')[0]);
             Name = data.Split('#')[1];
             Credit = int.Parse(data.Split('#')[2]);
         }
