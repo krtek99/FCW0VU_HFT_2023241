@@ -28,11 +28,12 @@ namespace FCW0VU_HFT_2023241.Models
 
         public Employee() { }
         
-        public Employee(int studentID, string name, int salary)
+        public Employee(int studentID, string name, int salary, int departmentid)
         {
             Id = studentID;
             Name = name;
             Salary = salary;
+            DepartmentId = departmentid;
         }
 
         public Employee(string data)
@@ -40,6 +41,7 @@ namespace FCW0VU_HFT_2023241.Models
             Id = int.Parse(data.Split('#')[0]);
             Name = data.Split('#')[1];
             Salary = int.Parse(data.Split('#')[2]);
+            DepartmentId = int.Parse(data.Split('#')[3]);
         }
     }
 }

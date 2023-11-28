@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FCW0VU_HFT_2023241.Logic;
+using FCW0VU_HFT_2023241.Repository;
+using System;
 
 namespace FCW0VU_HFT_2023241.Client
 {
@@ -6,7 +8,13 @@ namespace FCW0VU_HFT_2023241.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var ctx = new HRDbContext();
+            var repo = new EmployeeRepository(ctx);
+            var logic = new EmployeeLogic(repo);
+
+            var asd = logic.ReadAll();
+
+            ;
         }
     }
 }
