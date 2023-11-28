@@ -43,18 +43,34 @@ namespace FCW0VU_HFT_2023241.Logic
             return this.repo.Read(Id);
         }
 
-        public IQueryable<Employee> ReadAll()
+        public IEnumerable<Employee> ReadAll()
         {
             return this.repo.ReadAll();
         }
 
         public void Update(Employee item)
         {
-            throw new NotImplementedException();
+            this.repo.Update(item);
         }
         #endregion
 
         //non-crud
 
+        public class EmployeesPerDepartmentInfo
+        {
+            public int EmpCount { get; set; }
+            public string depname { get; set; }
+        }
+        public IEnumerable<EmployeesPerDepartmentInfo> EmployeesPerDepartment() 
+        {
+            var asd = from x in this.repo.ReadAll()
+                      group x by x.Department.Name into g
+                      select new EmployeesPerDepartmentInfo
+                      {
+                          EmpCount = g.Count(),
+                          depname = g.Key
+                      };
+            return asd;
+        }
     }
 }

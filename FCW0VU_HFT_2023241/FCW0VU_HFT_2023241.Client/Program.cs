@@ -14,6 +14,7 @@ namespace FCW0VU_HFT_2023241.Client
 
             var asd = logic.ReadAll();
 
+            var asdasdas = logic.EmployeesPerDepartment();
             ;
         }
     }
