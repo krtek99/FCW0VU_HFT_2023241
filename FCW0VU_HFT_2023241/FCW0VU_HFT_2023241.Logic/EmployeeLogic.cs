@@ -59,18 +59,37 @@ namespace FCW0VU_HFT_2023241.Logic
         public class EmployeesPerDepartmentInfo
         {
             public int EmpCount { get; set; }
-            public string depname { get; set; }
+            public string DepName { get; set; }
         }
         public IEnumerable<EmployeesPerDepartmentInfo> EmployeesPerDepartment() 
         {
-            var asd = from x in this.repo.ReadAll()
+            var output = from x in this.repo.ReadAll()
                       group x by x.Department.Name into g
                       select new EmployeesPerDepartmentInfo
                       {
                           EmpCount = g.Count(),
-                          depname = g.Key
+                          DepName = g.Key
                       };
-            return asd;
+            return output;
+        }
+        
+        public class AvgSalaryPerDepartmentInfo
+        {
+            public double AvgSalary { get; set; }
+            public string DepName { get; set; }
+        }
+
+        public IEnumerable<AvgSalaryPerDepartmentInfo> AvgSalaryPerDepartment()
+        {
+            var output = from x in this.repo.ReadAll()
+                         group x by x.Department.Name into g
+                         select new AvgSalaryPerDepartmentInfo
+                         {
+                             DepName = g.Key,
+                             AvgSalary = g.Average(x => x.Salary)
+                         };
+
+            return output;
         }
     }
 }
