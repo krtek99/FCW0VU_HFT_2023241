@@ -1,5 +1,6 @@
 ﻿using FCW0VU_HFT_2023241.Models;
 using FCW0VU_HFT_2023241.Repository;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,25 +62,25 @@ namespace FCW0VU_HFT_2023241.Logic
             public int EmpCount { get; set; }
             public string DepName { get; set; }
         }
-        public IEnumerable<EmployeesPerDepartmentInfo> EmployeesPerDepartment() 
+        public IEnumerable<EmployeesPerDepartmentInfo> GetEmployeesPerDepartment()
         {
             var output = from x in this.repo.ReadAll()
-                      group x by x.Department.Name into g
-                      select new EmployeesPerDepartmentInfo
-                      {
-                          EmpCount = g.Count(),
-                          DepName = g.Key
-                      };
+                         group x by x.Department.Name into g
+                         select new EmployeesPerDepartmentInfo
+                         {
+                             EmpCount = g.Count(),
+                             DepName = g.Key
+                         };
             return output;
         }
-        
+
         public class AvgSalaryPerDepartmentInfo
         {
             public double AvgSalary { get; set; }
             public string DepName { get; set; }
         }
 
-        public IEnumerable<AvgSalaryPerDepartmentInfo> AvgSalaryPerDepartment()
+        public IEnumerable<AvgSalaryPerDepartmentInfo> GetAvgSalaryPerDepartment()
         {
             var output = from x in this.repo.ReadAll()
                          group x by x.Department.Name into g
@@ -89,6 +90,34 @@ namespace FCW0VU_HFT_2023241.Logic
                              AvgSalary = g.Average(x => x.Salary)
                          };
 
+            return output;
+        }
+
+        public class LargestSalaryPerDepartmentInfo
+        {
+            public string DepName { get; set; }
+            public Employee Emp { get; set; }
+        }
+        public IEnumerable<LargestSalaryPerDepartmentInfo> GetLargestSalaryPerDepartment()
+        {
+            var maxSalariesByDepartment = repo.ReadAll()
+                .GroupBy(emp => emp.DepartmentId)
+                .Select(group => new
+                {
+                    DepartmentId = group.Key,
+                    MaxSalary = group.Max(emp => emp.Salary)
+                })
+                .ToList();
+
+            var output = maxSalariesByDepartment
+                .SelectMany(maxSalary => repo.ReadAll()
+                    .Where(emp => emp.DepartmentId == maxSalary.DepartmentId && emp.Salary == maxSalary.MaxSalary)
+                    .Select(emp => new LargestSalaryPerDepartmentInfo
+                    {
+                        DepName = emp.Department.Name,
+                        Emp = emp
+                    }))
+                .ToList();
             return output;
         }
     }

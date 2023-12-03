@@ -43,5 +43,11 @@ namespace FCW0VU_HFT_2023241.Models
             Salary = int.Parse(data.Split('#')[2]);
             DepartmentId = int.Parse(data.Split('#')[3]);
         }
+
+        public override string ToString()
+        {
+            string output = "{" + this.Id + ", " + this.Name + ", " + this.Salary + ", " + this.DepartmentId + "}";
+            return output;
+        }
     }
 }

@@ -14,8 +14,31 @@ namespace FCW0VU_HFT_2023241.Client
 
             var asd = logic.ReadAll();
 
-            var asdasdas = logic.EmployeesPerDepartment();
-            ;
+            var asdasdas = logic.GetEmployeesPerDepartment();
+            
+            var afg = logic.GetAvgSalaryPerDepartment();
+            
+            var gsdfs = logic.GetLargestSalaryPerDepartment();
+            
+
+            Console.WriteLine("GetEmployeesPerDepartment:");
+            foreach ( var s in asdasdas)
+            {
+                Console.WriteLine(s.DepName + "     " + s.EmpCount);
+            }
+
+            Console.WriteLine("\nGetAvgSalaryPerDepartment");
+            foreach (var s in afg)
+            {
+                Console.WriteLine(s.DepName + "     " + s.AvgSalary);
+            }
+
+            Console.WriteLine("\nGetLargestSalaryPerDepartment");
+            foreach (var s in gsdfs)
+            {
+                Console.WriteLine(s.DepName + "     " + s.Emp.ToString());
+            }
+
         }
     }
 }
