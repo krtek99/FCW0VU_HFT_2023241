@@ -161,8 +161,24 @@ namespace FCW0VU_HFT_2023241.Client
         }
         static void Delete(string entity)
         {
-            Console.WriteLine(entity + " delete");
-            Console.ReadLine();
+            if (entity == "Employee")
+            {
+                Console.Write("Enter employee's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "employee");
+            }
+            if (entity == "Department")
+            {
+                Console.Write("Enter department's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "department");
+            }
+            if (entity == "Location")
+            {
+                Console.Write("Enter location's id to delete: ");
+                int id = int.Parse(Console.ReadLine());
+                rest.Delete(id, "location");
+            }
         }
 
         static void Main(string[] args)
