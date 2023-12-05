@@ -50,7 +50,24 @@ namespace FCW0VU_HFT_2023241.Test
                 new Location("5#Győr#Kossuth tér 3.")
             }.ToList();
 
-            
+            mockEmployeeRepository = new Mock<IRepository<Employee>>();
+            mockEmployeeRepository.Setup(t => t.ReadAll()).Returns(employees.AsQueryable());
+
+            mockDepartmentRepository = new Mock<IRepository<Department>>();
+            mockDepartmentRepository.Setup(t => t.ReadAll()).Returns(departments.AsQueryable());
+
+            mockLocationRepository = new Mock<IRepository<Location>>();
+            mockLocationRepository.Setup(t => t.ReadAll()).Returns(locations.AsQueryable());
+
+            //add department for each employee
+            employees.ForEach(t => { t.Department = departments.Find(x => x.Id == t.DepartmentId); });
+
+            //add location for each department
+            departments.ForEach(t => { t.Location = locations.Find(x => x.Id == t.LocationId); });
+
+            employeeLogic = new EmployeeLogic(mockEmployeeRepository.Object);
+            departmentLogic = new DepartmentLogic(mockDepartmentRepository.Object);
+            locationLogic = new LocationLogic(mockLocationRepository.Object);
         }
 
         
