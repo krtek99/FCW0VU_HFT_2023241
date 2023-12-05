@@ -5,13 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using FCW0VU_HFT_2023241.Models;
 using FCW0VU_HFT_2023241.Repository;
-using FCW0VU_HFT_2023241.Repository.Interfaces;
 
 namespace FCW0VU_HFT_2023241.Logic
 {
     //crud
     #region crud
-    internal class DepartmentLogic
+    public class DepartmentLogic
     {
         IRepository<Department> repo;
         public DepartmentLogic(IRepository<Department> item) 

@@ -57,48 +57,41 @@ namespace FCW0VU_HFT_2023241.Logic
 
         //non-crud
 
-        public class EmployeesPerDepartmentInfo
-        {
-            public int EmpCount { get; set; }
-            public string DepName { get; set; }
-        }
-        public IEnumerable<EmployeesPerDepartmentInfo> GetEmployeesPerDepartment()
+        //public class EmployeesPerDepartmentInfo
+        //{
+        //    public int EmpCount { get; set; }
+        //    public string DepName { get; set; }
+        //}
+        public IEnumerable<KeyValuePair<string, int>> GetEmployeesPerDepartment()
         {
             var output = from x in this.repo.ReadAll()
                          group x by x.Department.Name into g
-                         select new EmployeesPerDepartmentInfo
-                         {
-                             EmpCount = g.Count(),
-                             DepName = g.Key
-                         };
+                         orderby g.Count()
+                         select new KeyValuePair<string, int>(g.Key, g.Count());
+          
             return output;
         }
 
-        public class AvgSalaryPerDepartmentInfo
-        {
-            public double AvgSalary { get; set; }
-            public string DepName { get; set; }
-        }
-
-        public IEnumerable<AvgSalaryPerDepartmentInfo> GetAvgSalaryPerDepartment()
+        //public class AvgSalaryPerDepartmentInfo
+        //{
+        //    public double AvgSalary { get; set; }
+        //    public string DepName { get; set; }
+        //}
+        public IEnumerable<KeyValuePair<string, double>> GetAvgSalaryPerDepartment()
         {
             var output = from x in this.repo.ReadAll()
                          group x by x.Department.Name into g
-                         select new AvgSalaryPerDepartmentInfo
-                         {
-                             DepName = g.Key,
-                             AvgSalary = g.Average(x => x.Salary)
-                         };
+                         select new KeyValuePair<string, double>(g.Key, MathF.Round((float)g.Average(x => x.Salary),1));
 
             return output;
         }
 
-        public class LargestSalaryPerDepartmentInfo
-        {
-            public string DepName { get; set; }
-            public Employee Emp { get; set; }
-        }
-        public IEnumerable<LargestSalaryPerDepartmentInfo> GetLargestSalaryPerDepartment()
+        //public class LargestSalaryPerDepartmentInfo
+        //{
+        //    public string DepName { get; set; }
+        //    public Employee Emp { get; set; }
+        //}
+        public IEnumerable<KeyValuePair<string, string>> GetLargestSalaryPerDepartment()
         {
             var maxSalariesByDepartment = repo.ReadAll()
                 .GroupBy(emp => emp.DepartmentId)
@@ -112,12 +105,8 @@ namespace FCW0VU_HFT_2023241.Logic
             var output = maxSalariesByDepartment
                 .SelectMany(maxSalary => repo.ReadAll()
                     .Where(emp => emp.DepartmentId == maxSalary.DepartmentId && emp.Salary == maxSalary.MaxSalary)
-                    .Select(emp => new LargestSalaryPerDepartmentInfo
-                    {
-                        DepName = emp.Department.Name,
-                        Emp = emp
-                    }))
-                .ToList();
+                    .Select(emp => new KeyValuePair<string, string>(emp.Department.Name, emp.Name)))
+                    .ToList();
             return output;
         }
     }

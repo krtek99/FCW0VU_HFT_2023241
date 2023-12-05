@@ -75,7 +75,7 @@ namespace FCW0VU_HFT_2023241.Repository
                 new Employee("5#Horváth Zsuzsa#220000#1"),
                 new Employee("6#Kiss Bence#260000#3"),
                 new Employee("7#Molnár Viktória#190000#7"),
-                new Employee("8#Németh Dániel#280000#10"),
+                new Employee("8#Németh Dániel#280000#4"),
                 new Employee("9#Farkas Csilla#270000#5"),
                 new Employee("10#Papp Ádám#200000#9"),
                 new Employee("11#Kovács Dávid#240000#2"),

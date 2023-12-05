@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Logic
 {
-    internal class LocationLogic
+    public class LocationLogic
     {
         IRepository<Location> repo;
 
