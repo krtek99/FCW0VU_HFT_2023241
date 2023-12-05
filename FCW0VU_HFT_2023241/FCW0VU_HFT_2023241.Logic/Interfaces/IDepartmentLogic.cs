@@ -7,7 +7,7 @@ namespace FCW0VU_HFT_2023241.Logic
     {
         void Create(Department item);
         void Delete(int Id);
-        IEnumerable<KeyValuePair<string, string>> GetDepartmentNameDetails(int departmentID);
+        IEnumerable<KeyValuePair<string, string>> GetDepartmentNameDetails();
         Department Read(int Id);
         IEnumerable<Department> ReadAll();
         void Update(Department item);

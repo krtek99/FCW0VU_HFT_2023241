@@ -73,6 +73,7 @@ namespace FCW0VU_HFT_2023241.Client
                 {
                     Console.WriteLine(item.Id + "\t" + item.Name + "\t" + item.Salary + "\t" + item.DepartmentId);
                 }
+                Console.WriteLine();
             }
             if (entity == "Department")
             {
@@ -91,6 +92,52 @@ namespace FCW0VU_HFT_2023241.Client
                 foreach (var item in locations)
                 {
                     Console.WriteLine(item.Id + "\t" + item.Name + "\t" + item.Address);
+                }
+                Console.WriteLine();
+            }
+            if(entity == "Stat/GetDepartmentNameDetails")
+            {
+                List<KeyValuePair<string, string>> q = rest.Get<KeyValuePair<string, string>>("Stat/GetDepartmentNameDetails");
+
+                foreach (var item in q)
+                {
+                    Console.WriteLine(item.Key + "\t" + item.Value);
+                }
+            }
+            if(entity == "Stat/GetAvgSalaryPerDepartment")
+            {
+                List<KeyValuePair<string, double>> q = rest.Get<KeyValuePair<string, double>>("Stat/GetAvgSalaryPerDepartment");
+
+                foreach (var item in q)
+                {
+                    Console.WriteLine(item.Key + "\t" + item.Value);
+                }
+            }
+            if (entity == "Stat/GetEmployeesPerDepartment")
+            {
+                List<KeyValuePair<string, int>> q = rest.Get<KeyValuePair<string, int>>("Stat/GetEmployeesPerDepartment");
+
+                foreach (var item in q)
+                {
+                    Console.WriteLine(item.Key + "\t" + item.Value);
+                }
+            }
+            if (entity == "Stat/GetLargestSalaryPerDepartment")
+            {
+                List<KeyValuePair<string, string>> q = rest.Get<KeyValuePair<string, string>>("Stat/GetLargestSalaryPerDepartment");
+
+                foreach (var item in q)
+                {
+                    Console.WriteLine(item.Key + "\t" + item.Value);
+                }
+            }
+            if (entity == "Stat/GetTotalSalaryCostPerDepartment")
+            {
+                List<KeyValuePair<string, int>> q = rest.Get<KeyValuePair<string, int>>("Stat/GetTotalSalaryCostPerDepartment");
+
+                foreach (var item in q)
+                {
+                    Console.WriteLine(item.Key + "\t" + item.Value);
                 }
             }
 
@@ -183,7 +230,7 @@ namespace FCW0VU_HFT_2023241.Client
 
         static void Main(string[] args)
         {
-            rest = new RestService("http://localhost:13109", "/Department");
+            rest = new RestService("http://localhost:13109/", "Department");
 
             var employeeSubMenu = new ConsoleMenu(args, level: 1)
                 .Add("List", () => List("Employee"))
@@ -206,11 +253,20 @@ namespace FCW0VU_HFT_2023241.Client
                 .Add("Update", () => Update("Location"))
                 .Add("Exit", ConsoleMenu.Close);
 
+            var statSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Department Details", () => List("Stat/GetDepartmentNameDetails"))
+                .Add("Average Salary By Departments", () => List("Stat/GetAvgSalaryPerDepartment"))
+                .Add("Employees By Departments", () => List("Stat/GetEmployeesPerDepartment"))
+                .Add("Largest Salary By Departments", () => List("Stat/GetLargestSalaryPerDepartment"))
+                .Add("Total Salary Cost By Departments", () => List("Stat/GetTotalSalaryCostPerDepartment"))
+                .Add("Exit", ConsoleMenu.Close);
+
 
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Employee", () => employeeSubMenu.Show())
                 .Add("Department", () => departmentSubMenu.Show())
                 .Add("Location", () => locationSubMenu.Show())
+                .Add("Statistics",() => statSubMenu.Show())
                 .Add("Exit", ConsoleMenu.Close);
 
             menu.Show();

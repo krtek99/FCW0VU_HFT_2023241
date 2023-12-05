@@ -53,23 +53,12 @@ namespace FCW0VU_HFT_2023241.Logic
         }
         #endregion
 
-        public IEnumerable<KeyValuePair<string, string>> GetDepartmentNameDetails(int departmentID)
+        public IEnumerable<KeyValuePair<string, string>> GetDepartmentNameDetails()
         {
             var output = repo.ReadAll()
-                .Where(x => x.Id == departmentID)
-                .Select(x => new KeyValuePair<string, string>(x.Name, x.Location.Name + ", " + x.Location.Address)).FirstOrDefault();
+                .Select(x => new KeyValuePair<string, string>(x.Name, x.Location.Name + ", " + x.Location.Address)).ToList();
 
-            if (output.Key == null || output.Value == null)
-            {
-                throw new Exception("No department was found with the given ID");
-            }
-            else
-            {
-                List<KeyValuePair<string, string>> a = new List<KeyValuePair<string, string>>();
-                a.Add(output);
-
-                return a;
-            }
+            return output;
         }
     }
 }

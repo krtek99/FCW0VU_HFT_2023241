@@ -116,11 +116,13 @@ namespace FCW0VU_HFT_2023241.Test
         [Test]
         public void DepartmentDetailsTest()
         {
-            var result = departmentLogic.GetDepartmentNameDetails(4);
+            var result = departmentLogic.GetDepartmentNameDetails();
 
             var expected = new List<KeyValuePair<string, string>>()
             {
-                new KeyValuePair<string, string>("Marketing", "Debrecen, Piac utca 10.")
+                new KeyValuePair<string, string>("Finance", "Győr, Kossuth tér 3."),
+                new KeyValuePair<string, string>("Marketing", "Debrecen, Piac utca 10."),
+                new KeyValuePair<string, string>("Production", "Pécs, Alkotmány utca 8.")
             };
 
             Assert.AreEqual(expected, result);
