@@ -85,5 +85,30 @@ namespace FCW0VU_HFT_2023241.Test
             Assert.AreEqual(expected, result);
         }
 
+        [Test]
+        public void AvgSalaryPerDepartmentTest()
+        {
+            var result = employeeLogic.GetAvgSalaryPerDepartment();
+
+            var expected = new List<KeyValuePair<string, double>>()
+            {
+                new KeyValuePair<string, double>("Finance", 250000),
+                new KeyValuePair<string, double>("Marketing", 180000),
+                new KeyValuePair<string, double>("Production", 200000)
+            };
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void LargestSalaryPerDepartmentTest()
+        {
+            var expected = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("Finance", "Asd Gábor"),
+                new KeyValuePair<string, string>("Marketing", "Asd Péter"),
+                new KeyValuePair<string, string>("Production", "Kovács János")
+            };
+        }
     }
 }
