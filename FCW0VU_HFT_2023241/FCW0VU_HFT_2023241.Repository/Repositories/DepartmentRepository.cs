@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository.Repositories
 {
-    internal class DepartmentRepository : Repository<Department>
+    public class DepartmentRepository : Repository<Department>
     {
         public DepartmentRepository(HRDbContext ctx) : base(ctx)
         {

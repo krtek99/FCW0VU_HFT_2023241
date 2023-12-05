@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Repository.Repositories
 {
-    internal class LocationRepository : Repository<Location>
+    public class LocationRepository : Repository<Location>
     {
         public LocationRepository(HRDbContext ctx) : base(ctx)
         {

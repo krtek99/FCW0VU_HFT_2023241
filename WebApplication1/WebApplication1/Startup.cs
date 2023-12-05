@@ -1,7 +1,3 @@
-using FCW0VU_HFT_2023241.Logic;
-using FCW0VU_HFT_2023241.Models;
-using FCW0VU_HFT_2023241.Repository.Repositories;
-using FCW0VU_HFT_2023241.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FCW0VU_HFT_2023241.Endpoint
+namespace WebApplication1
 {
     public class Startup
     {
@@ -25,17 +21,10 @@ namespace FCW0VU_HFT_2023241.Endpoint
         }
 
         public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<HRDbContext>();
-
-            services.AddTransient<IRepository<Employee>, EmployeeRepository>();
-            services.AddTransient<IRepository<Department>, DepartmentRepository>();
-            services.AddTransient<IRepository<Location>, LocationRepository>();
-
-            services.AddTransient<IEmployeeLogic, EmployeeLogic>();
-            services.AddTransient<IDepartmentLogic, DepartmentLogic>();
-            services.AddTransient<ILocationLogic, LocationLogic>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -44,6 +33,7 @@ namespace FCW0VU_HFT_2023241.Endpoint
             });
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
