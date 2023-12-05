@@ -1,4 +1,5 @@
-﻿using FCW0VU_HFT_2023241.Models;
+﻿using FCW0VU_HFT_2023241.Logic;
+using FCW0VU_HFT_2023241.Models;
 using FCW0VU_HFT_2023241.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Logic
 {
-    public class EmployeeLogic
+    public class EmployeeLogic : IEmployeeLogic
     {
         IRepository<Employee> repo;
 
@@ -68,7 +69,7 @@ namespace FCW0VU_HFT_2023241.Logic
                          group x by x.Department.Name into g
                          orderby g.Count()
                          select new KeyValuePair<string, int>(g.Key, g.Count());
-          
+
             return output;
         }
 
@@ -81,7 +82,7 @@ namespace FCW0VU_HFT_2023241.Logic
         {
             var output = from x in this.repo.ReadAll()
                          group x by x.Department.Name into g
-                         select new KeyValuePair<string, double>(g.Key, MathF.Round((float)g.Average(x => x.Salary),1));
+                         select new KeyValuePair<string, double>(g.Key, MathF.Round((float)g.Average(x => x.Salary), 1));
 
             return output;
         }

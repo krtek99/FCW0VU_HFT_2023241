@@ -11,10 +11,10 @@ namespace FCW0VU_HFT_2023241.Logic
 {
     //crud
     #region crud
-    public class DepartmentLogic
+    public class DepartmentLogic : IDepartmentLogic
     {
         IRepository<Department> repo;
-        public DepartmentLogic(IRepository<Department> item) 
+        public DepartmentLogic(IRepository<Department> item)
         {
             this.repo = item;
         }
@@ -59,11 +59,11 @@ namespace FCW0VU_HFT_2023241.Logic
                 .Where(x => x.Id == departmentID)
                 .Select(x => new KeyValuePair<string, string>(x.Name, x.Location.Name + ", " + x.Location.Address)).FirstOrDefault();
 
-            if(output.Key == null || output.Value == null)
+            if (output.Key == null || output.Value == null)
             {
                 throw new Exception("No department was found with the given ID");
             }
-            else 
+            else
             {
                 List<KeyValuePair<string, string>> a = new List<KeyValuePair<string, string>>();
                 a.Add(output);
