@@ -142,6 +142,7 @@ namespace FCW0VU_HFT_2023241.Test
         }
 
         //crud
+        [Test]
         public void CreateEmployeeTest()
         {
             var employee = new Employee("7#Qwerty Béla#100000#2");
@@ -150,6 +151,7 @@ namespace FCW0VU_HFT_2023241.Test
             mockEmployeeRepository.Verify(x => x.Create(employee), Times.Once);
         }
 
+        [Test]
         public void CreateDepartmentTest()
         {
             var department = new Department("7#Freeloaders#5#1#1000000");
@@ -158,12 +160,37 @@ namespace FCW0VU_HFT_2023241.Test
             mockDepartmentRepository.Verify(x => x.Create(department), Times.Once);
         }
 
+        [Test]
         public void CreateLocationTest()
         {
             var location = new Location("6#Gyöngyös#Széchenyi utca 31.");
             locationLogic.Create(location);
 
             mockLocationRepository.Verify(x => x.Create(location), Times.Once);
+        }
+
+        [Test]
+        public void CreateWrongEmployeeTest()
+        {
+            var employee = new Employee("7#Qwerty Béla#-1#2");
+            try
+            {
+                employeeLogic.Create(employee);
+            }
+            catch
+            {
+
+            }
+
+            mockEmployeeRepository.Verify(x => x.Create(employee), Times.Never);
+        }
+
+        [Test]
+        public void DeleteTest()
+        {
+            employeeLogic.Delete(2);
+
+            mockEmployeeRepository.Verify(x => x.Delete(2), Times.Once);
         }
     }
 }
