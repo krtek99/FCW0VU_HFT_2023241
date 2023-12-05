@@ -70,6 +70,20 @@ namespace FCW0VU_HFT_2023241.Test
             locationLogic = new LocationLogic(mockLocationRepository.Object);
         }
 
-        
+        [Test]
+        public void EmployeesPerDepartmentTest()
+        {
+            var result = employeeLogic.GetEmployeesPerDepartment();
+
+            var expected = new List<KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>("Finance", 1),
+                new KeyValuePair<string, int>("Marketing", 2),
+                new KeyValuePair<string, int>("Production", 3),
+            };
+
+            Assert.AreEqual(expected, result);
+        }
+
     }
 }
