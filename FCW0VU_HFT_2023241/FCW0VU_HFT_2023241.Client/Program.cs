@@ -98,15 +98,65 @@ namespace FCW0VU_HFT_2023241.Client
         }
         static void Update(string entity)
         {
-            if (entity == "Actor")
+            if (entity == "Employee")
             {
-                Console.Write("Enter Actor's id to update: ");
+                Console.Write("Enter employee's id to update: ");
                 int id = int.Parse(Console.ReadLine());
-                Employee one = rest.Get<Employee>(id, "actor");
+                Employee one = rest.Get<Employee>(id, "employee");
+
                 Console.Write($"New name [old: {one.Name}]: ");
                 string name = Console.ReadLine();
                 one.Name = name;
-                rest.Put(one, "actor");
+
+                Console.Write($"New salary [old: {one.Salary}]: ");
+                string salary = Console.ReadLine();
+                one.Salary = int.Parse(salary);
+
+                Console.Write($"New department_id [old: {one.DepartmentId}]: ");
+                string dep = Console.ReadLine();
+                one.DepartmentId = int.Parse(dep);
+
+                rest.Put(one, "employee");
+            }
+            if (entity == "Department")
+            {
+                Console.Write("Enter department's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Department one = rest.Get<Department>(id, "department");
+
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+
+                Console.Write($"New income [old: {one.Income}]: ");
+                string income = Console.ReadLine();
+                one.Income = int.Parse(income);
+
+                Console.Write($"New expenses [old: {one.Expenses}]: ");
+                string exp = Console.ReadLine();
+                one.Expenses = int.Parse(exp);
+
+                Console.Write($"New location id [old: {one.LocationId}]: ");
+                string loc = Console.ReadLine();
+                one.Expenses = int.Parse(loc);
+
+                rest.Put(one, "dpeartment");
+            }
+            if (entity == "Location")
+            {
+                Console.Write("Enter location's id to update: ");
+                int id = int.Parse(Console.ReadLine());
+                Location one = rest.Get<Location>(id, "employee");
+
+                Console.Write($"New name [old: {one.Name}]: ");
+                string name = Console.ReadLine();
+                one.Name = name;
+
+                Console.Write($"New address [old: {one.Address}]: ");
+                string address = Console.ReadLine();
+                one.Address = address;
+
+                rest.Put(one, "location");
             }
         }
         static void Delete(string entity)
