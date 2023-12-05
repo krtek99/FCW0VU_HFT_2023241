@@ -109,5 +109,14 @@ namespace FCW0VU_HFT_2023241.Logic
                     .ToList();
             return output;
         }
+
+        public IEnumerable<KeyValuePair<string, int>> GetTotalSalaryCostPerDepartment()
+        {
+            var output = from x in this.repo.ReadAll()
+                         group x by x.Department.Name into g
+                         select new KeyValuePair<string, int>(g.Key, g.Sum(x => x.Salary));
+
+            return output;
+        }
     }
 }

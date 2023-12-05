@@ -1,6 +1,7 @@
 ﻿using FCW0VU_HFT_2023241.Logic;
 using FCW0VU_HFT_2023241.Models;
 using FCW0VU_HFT_2023241.Repository;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
 using Moq;
 using NUnit.Framework;
 using System;
@@ -38,9 +39,9 @@ namespace FCW0VU_HFT_2023241.Test
 
             List<Department> departments = new List<Department>()
             {
-                new Department("2#Finance#5#200000#120000"),
-                new Department("4#Marketing#2#180000#90000"),
-                new Department("6#Production#4#220000#130000")
+                new Department("2#Finance#5#2000000#1200000"),
+                new Department("4#Marketing#2#1800000#900000"),
+                new Department("6#Production#4#2200000#1300000")
             }.ToList();
 
             List<Location> locations = new List<Location>()
@@ -70,6 +71,7 @@ namespace FCW0VU_HFT_2023241.Test
             locationLogic = new LocationLogic(mockLocationRepository.Object);
         }
 
+        //non-crud
         [Test]
         public void EmployeesPerDepartmentTest()
         {
@@ -109,6 +111,59 @@ namespace FCW0VU_HFT_2023241.Test
                 new KeyValuePair<string, string>("Marketing", "Asd Péter"),
                 new KeyValuePair<string, string>("Production", "Kovács János")
             };
+        }
+
+        [Test]
+        public void DepartmentDetailsTest()
+        {
+            var result = departmentLogic.GetDepartmentNameDetails(4);
+
+            var expected = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("Marketing", "Debrecen, Piac utca 10.")
+            };
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void TotalSalaryCostPerDepartmentTest()
+        {
+            var result = employeeLogic.GetTotalSalaryCostPerDepartment();
+
+            var expected = new List<KeyValuePair<string, int>>()
+            {
+                new KeyValuePair<string, int>("Finance", 250000),
+                new KeyValuePair<string, int>("Marketing", 360000),
+                new KeyValuePair<string, int>("Production", 600000)
+            };
+
+            Assert.AreEqual(expected, result);
+        }
+
+        //crud
+        public void CreateEmployeeTest()
+        {
+            var employee = new Employee("7#Qwerty Béla#100000#2");
+            employeeLogic.Create(employee);
+
+            mockEmployeeRepository.Verify(x => x.Create(employee), Times.Once);
+        }
+
+        public void CreateDepartmentTest()
+        {
+            var department = new Department("7#Freeloaders#5#1#1000000");
+            departmentLogic.Create(department);
+
+            mockDepartmentRepository.Verify(x => x.Create(department), Times.Once);
+        }
+
+        public void CreateLocationTest()
+        {
+            var location = new Location("6#Gyöngyös#Széchenyi utca 31.");
+            locationLogic.Create(location);
+
+            mockLocationRepository.Verify(x => x.Create(location), Times.Once);
         }
     }
 }
