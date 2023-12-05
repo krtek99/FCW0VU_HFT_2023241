@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace FCW0VU_HFT_2023241.Models
@@ -23,6 +24,7 @@ namespace FCW0VU_HFT_2023241.Models
 
         public Location() { }
 
+        [JsonIgnore]
         [NotMapped]
         public virtual ICollection<Department> Departments { get; set; }
         public Location(int courseID, string name, string address)

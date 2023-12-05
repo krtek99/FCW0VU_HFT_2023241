@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 namespace FCW0VU_HFT_2023241.Endpoint.Controllers
 {
-    public class LocationController : Controller
+    [Route("[controller]")]
+    public class LocationController : ControllerBase
     {
         ILocationLogic logic;
 

@@ -6,7 +6,8 @@ using System.Collections.Generic;
 
 namespace FCW0VU_HFT_2023241.Endpoint.Controllers
 {
-    public class DepartmentController : Controller
+    [Route("[controller]")]
+    public class DepartmentController : ControllerBase
     {
         IDepartmentLogic logic;
 
