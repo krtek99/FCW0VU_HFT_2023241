@@ -157,13 +157,12 @@ namespace FCW0VU_HFT_2023241.Client
                 try
                 {
                     Employee one = new Employee();
-                    try
-                    {
-                        Console.Write("Enter employee's id to update: ");
-                        int id = int.Parse(Console.ReadLine());
-                        one = rest.Get<Employee>(id, "employee");
-                    }
-                    catch
+                    
+                    Console.Write("Enter employee's id to update: ");
+                    int id = int.Parse(Console.ReadLine());
+                    one = rest.Get<Employee>(id, "employee");
+
+                    if(one == null)
                     {
                         throw new ArgumentException("No employee found with given id.");
                     }
@@ -198,13 +197,12 @@ namespace FCW0VU_HFT_2023241.Client
                 try
                 {
                     Department one = new Department();
-                    try
-                    {
-                        Console.Write("Enter department's id to update: ");
-                        int id = int.Parse(Console.ReadLine());
-                        one = rest.Get<Department>(id, "department");
-                    }
-                    catch
+
+                    Console.Write("Enter department's id to update: ");
+                    int id = int.Parse(Console.ReadLine());
+                    one = rest.Get<Department>(id, "department");
+                    
+                    if(one == null)
                     {
                         throw new ArgumentException("No department found with given id.");
                     }
@@ -242,13 +240,12 @@ namespace FCW0VU_HFT_2023241.Client
                 try
                 {
                     Location one = new Location();
-                    try
-                    {
-                        Console.Write("Enter location's id to update: ");
-                        int id = int.Parse(Console.ReadLine());
-                        one = rest.Get<Location>(id, "employee");
-                    }
-                    catch
+                    
+                    Console.Write("Enter location's id to update: ");
+                    int id = int.Parse(Console.ReadLine());
+                    one = rest.Get<Location>(id, "employee");
+
+                    if(one == null)
                     {
                         throw new ArgumentException("No location found with given id.");
                     }
