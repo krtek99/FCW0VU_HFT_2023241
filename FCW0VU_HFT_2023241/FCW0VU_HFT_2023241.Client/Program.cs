@@ -184,13 +184,12 @@ namespace FCW0VU_HFT_2023241.Client
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
-                    Console.ReadLine() ;
                 }
                 catch
                 {
                     Console.WriteLine("Invalid input!");
-                    Console.ReadLine();
                 }
+                Console.ReadLine();
             }
             if (entity == "Department")
             {
@@ -227,13 +226,12 @@ namespace FCW0VU_HFT_2023241.Client
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
-                    Console.ReadLine();
                 }
                 catch
                 {
                     Console.WriteLine("Invalid input!");
-                    Console.ReadLine();
                 }
+                Console.ReadLine();
             }
             if (entity == "Location")
             {
@@ -263,13 +261,12 @@ namespace FCW0VU_HFT_2023241.Client
                 catch (ArgumentException e)
                 {
                     Console.WriteLine(e.Message);
-                    Console.ReadLine();
                 }
                 catch
                 {
                     Console.WriteLine("Invalid input!");
-                    Console.ReadLine();
                 }
+                Console.ReadLine();
             }
         }
         static void Delete(string entity)
@@ -298,8 +295,8 @@ namespace FCW0VU_HFT_2023241.Client
             catch
             {
                 Console.WriteLine($"No {entity.ToLower()} found with given id.");
-                Console.ReadLine();
             }
+            Console.ReadLine();
         }
         static void Read(string entity)
         {
