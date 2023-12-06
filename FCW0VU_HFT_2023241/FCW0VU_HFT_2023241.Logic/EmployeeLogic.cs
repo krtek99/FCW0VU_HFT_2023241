@@ -32,7 +32,11 @@ namespace FCW0VU_HFT_2023241.Logic
 
         public void Delete(int Id)
         {
-            this.repo.Delete(Id);
+            Employee e = Read(Id);
+            if (e != null)
+            {
+                this.repo.Delete(Id);
+            }
         }
 
         public Employee Read(int Id)
