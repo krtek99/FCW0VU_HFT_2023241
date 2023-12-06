@@ -188,11 +188,18 @@ namespace FCW0VU_HFT_2023241.Test
         }
 
         [Test]
-        public void DeleteTest()
+        public void CreateWrongDepartmentTest()
         {
-            employeeLogic.Delete(2);
+            var department = new Department("11##1#1#1");
+            try
+            {
+                departmentLogic.Create(department);
+            }
+            catch
+            {
 
-            mockEmployeeRepository.Verify(x => x.Delete(2), Times.Once);
+            }
+            mockDepartmentRepository.Verify(x => x.Create(department), Times.Never);
         }
     }
 }
