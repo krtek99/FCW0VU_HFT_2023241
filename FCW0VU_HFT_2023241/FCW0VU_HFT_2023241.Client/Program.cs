@@ -3,6 +3,7 @@ using FCW0VU_HFT_2023241.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data;
 using System.Numerics;
 
 namespace FCW0VU_HFT_2023241.Client
@@ -12,55 +13,61 @@ namespace FCW0VU_HFT_2023241.Client
         static RestService rest;
         static void Create(string entity)
         {
-            if (entity == "Employee")
+            try
             {
-                Employee emp = new Employee();
-                Console.WriteLine("Enter employee's name:");
-                string name = Console.ReadLine();
-                emp.Name = name;
+                if (entity == "Employee")
+                {
+                    Employee emp = new Employee();
+                    Console.WriteLine("Enter employee's name:");
+                    string name = Console.ReadLine();
+                    emp.Name = name;
 
-                Console.WriteLine("Enter employee's salary:");
-                string salary = Console.ReadLine();
-                emp.Salary = int.Parse(salary);
+                    Console.WriteLine("Enter employee's salary:");
+                    string salary = Console.ReadLine();
+                    emp.Salary = int.Parse(salary);
 
-                Console.WriteLine("Enter employee's department id:");
-                string department = Console.ReadLine();
-                emp.DepartmentId = int.Parse(department);
-                rest.Post(emp, "employee");
+                    Console.WriteLine("Enter employee's department id:");
+                    string department = Console.ReadLine();
+                    emp.DepartmentId = int.Parse(department);
+                    rest.Post(emp, "employee");
+                }
+                if (entity == "Department")
+                {
+                    Department dep = new Department();
+                    Console.WriteLine("Enter department's name:");
+                    string name = Console.ReadLine();
+                    dep.Name = name;
+
+                    Console.WriteLine("Enter department's income:");
+                    string income = Console.ReadLine();
+                    dep.Income = int.Parse(income);
+
+                    Console.WriteLine("Enter department's expenses:");
+                    string expenses = Console.ReadLine();
+                    dep.Expenses = int.Parse(expenses);
+
+                    Console.WriteLine("Enter department's location id:");
+                    string location = Console.ReadLine();
+                    dep.Expenses = int.Parse(location);
+                    rest.Post(dep, "department");
+                }
+                if (entity == "Location")
+                {
+                    Location loc = new Location();
+                    Console.WriteLine("Enter location's name:");
+                    string name = Console.ReadLine();
+                    loc.Name = name;
+
+                    Console.WriteLine("Enter location's address:");
+                    string address = Console.ReadLine();
+                    loc.Address = address;
+                    rest.Post(loc, "location");
+                }
             }
-            if (entity == "Department")
+            catch
             {
-                Department dep = new Department();
-                Console.WriteLine("Enter department's name:");
-                string name = Console.ReadLine();
-                dep.Name = name;
-
-                Console.WriteLine("Enter department's income:");
-                string income = Console.ReadLine();
-                dep.Income = int.Parse(income);
-
-                Console.WriteLine("Enter department's expenses:");
-                string expenses = Console.ReadLine();
-                dep.Expenses = int.Parse(expenses);
-
-                Console.WriteLine("Enter department's location id:");
-                string location = Console.ReadLine();
-                dep.Expenses = int.Parse(location);
-
-                rest.Post(dep, "department");
-            }
-            if (entity == "Location")
-            {
-                Location loc = new Location();
-                Console.WriteLine("Enter location's name:");
-                string name = Console.ReadLine();
-                loc.Name = name;
-
-                Console.WriteLine("Enter location's address:");
-                string address = Console.ReadLine();
-                loc.Address = address;
-
-                rest.Post(loc, "location");
+                Console.WriteLine("Invalid input!");
+                Console.ReadLine();
             }
         }
         static void List(string entity)
@@ -147,84 +154,154 @@ namespace FCW0VU_HFT_2023241.Client
         {
             if (entity == "Employee")
             {
-                Console.Write("Enter employee's id to update: ");
-                int id = int.Parse(Console.ReadLine());
-                Employee one = rest.Get<Employee>(id, "employee");
+                try
+                {
+                    Employee one = new Employee();
+                    try
+                    {
+                        Console.Write("Enter employee's id to update: ");
+                        int id = int.Parse(Console.ReadLine());
+                        one = rest.Get<Employee>(id, "employee");
+                    }
+                    catch
+                    {
+                        throw new ArgumentException("No employee found with given id.");
+                    }
 
-                Console.Write($"New name [old: {one.Name}]: ");
-                string name = Console.ReadLine();
-                one.Name = name;
+                    Console.Write($"New name [old: {one.Name}]: ");
+                    string name = Console.ReadLine();
+                    one.Name = name;
 
-                Console.Write($"New salary [old: {one.Salary}]: ");
-                string salary = Console.ReadLine();
-                one.Salary = int.Parse(salary);
+                    Console.Write($"New salary [old: {one.Salary}]: ");
+                    string salary = Console.ReadLine();
+                    one.Salary = int.Parse(salary);
 
-                Console.Write($"New department_id [old: {one.DepartmentId}]: ");
-                string dep = Console.ReadLine();
-                one.DepartmentId = int.Parse(dep);
+                    Console.Write($"New department_id [old: {one.DepartmentId}]: ");
+                    string dep = Console.ReadLine();
+                    one.DepartmentId = int.Parse(dep);
 
-                rest.Put(one, "employee");
+                    rest.Put(one, "employee");
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine() ;
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid input!");
+                    Console.ReadLine();
+                }
             }
             if (entity == "Department")
             {
-                Console.Write("Enter department's id to update: ");
-                int id = int.Parse(Console.ReadLine());
-                Department one = rest.Get<Department>(id, "department");
+                try
+                {
+                    Department one = new Department();
+                    try
+                    {
+                        Console.Write("Enter department's id to update: ");
+                        int id = int.Parse(Console.ReadLine());
+                        one = rest.Get<Department>(id, "department");
+                    }
+                    catch
+                    {
+                        throw new ArgumentException("No department found with given id.");
+                    }
 
-                Console.Write($"New name [old: {one.Name}]: ");
-                string name = Console.ReadLine();
-                one.Name = name;
+                    Console.Write($"New name [old: {one.Name}]: ");
+                    string name = Console.ReadLine();
+                    one.Name = name;
 
-                Console.Write($"New income [old: {one.Income}]: ");
-                string income = Console.ReadLine();
-                one.Income = int.Parse(income);
+                    Console.Write($"New income [old: {one.Income}]: ");
+                    string income = Console.ReadLine();
+                    one.Income = int.Parse(income);
 
-                Console.Write($"New expenses [old: {one.Expenses}]: ");
-                string exp = Console.ReadLine();
-                one.Expenses = int.Parse(exp);
+                    Console.Write($"New expenses [old: {one.Expenses}]: ");
+                    string exp = Console.ReadLine();
+                    one.Expenses = int.Parse(exp);
 
-                Console.Write($"New location id [old: {one.LocationId}]: ");
-                string loc = Console.ReadLine();
-                one.Expenses = int.Parse(loc);
-
-                rest.Put(one, "dpeartment");
+                    Console.Write($"New location id [old: {one.LocationId}]: ");
+                    string loc = Console.ReadLine();
+                    one.Expenses = int.Parse(loc);
+                    rest.Put(one, "dpeartment");
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid input!");
+                    Console.ReadLine();
+                }
             }
             if (entity == "Location")
             {
-                Console.Write("Enter location's id to update: ");
-                int id = int.Parse(Console.ReadLine());
-                Location one = rest.Get<Location>(id, "employee");
+                try
+                {
+                    Location one = new Location();
+                    try
+                    {
+                        Console.Write("Enter location's id to update: ");
+                        int id = int.Parse(Console.ReadLine());
+                        one = rest.Get<Location>(id, "employee");
+                    }
+                    catch
+                    {
+                        throw new ArgumentException("No location found with given id.");
+                    }
 
-                Console.Write($"New name [old: {one.Name}]: ");
-                string name = Console.ReadLine();
-                one.Name = name;
+                    Console.Write($"New name [old: {one.Name}]: ");
+                    string name = Console.ReadLine();
+                    one.Name = name;
 
-                Console.Write($"New address [old: {one.Address}]: ");
-                string address = Console.ReadLine();
-                one.Address = address;
+                    Console.Write($"New address [old: {one.Address}]: ");
+                    string address = Console.ReadLine();
+                    one.Address = address;
 
-                rest.Put(one, "location");
+                    rest.Put(one, "location");
+                }
+                catch (ArgumentException e)
+                {
+                    Console.WriteLine(e.Message);
+                    Console.ReadLine();
+                }
+                catch
+                {
+                    Console.WriteLine("Invalid input!");
+                    Console.ReadLine();
+                }
             }
         }
         static void Delete(string entity)
         {
-            if (entity == "Employee")
+            try
             {
-                Console.Write("Enter employee's id to delete: ");
-                int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "employee");
+                if (entity == "Employee")
+                {
+                    Console.Write("Enter employee's id to delete: ");
+                    int id = int.Parse(Console.ReadLine());
+                    rest.Delete(id, "employee");
+                }
+                if (entity == "Department")
+                {
+                    Console.Write("Enter department's id to delete: ");
+                    int id = int.Parse(Console.ReadLine());
+                    rest.Delete(id, "department");
+                }
+                if (entity == "Location")
+                {
+                    Console.Write("Enter location's id to delete: ");
+                    int id = int.Parse(Console.ReadLine());
+                    rest.Delete(id, "location");
+                }
             }
-            if (entity == "Department")
+            catch
             {
-                Console.Write("Enter department's id to delete: ");
-                int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "department");
-            }
-            if (entity == "Location")
-            {
-                Console.Write("Enter location's id to delete: ");
-                int id = int.Parse(Console.ReadLine());
-                rest.Delete(id, "location");
+                Console.WriteLine($"No {entity.ToLower()} found with given id.");
+                Console.ReadLine();
             }
         }
 
