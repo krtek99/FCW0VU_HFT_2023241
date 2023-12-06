@@ -36,10 +36,6 @@ namespace FCW0VU_HFT_2023241.Logic
         public Location Read(int Id)
         {
             var emp = repo.Read(Id);
-            if (emp == null)
-            {
-                throw new ArgumentException("This location does not exist.");
-            }
             return this.repo.Read(Id);
         }
 

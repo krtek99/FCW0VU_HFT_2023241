@@ -304,12 +304,61 @@ namespace FCW0VU_HFT_2023241.Client
                 Console.ReadLine();
             }
         }
+        static void Read(string entity)
+        {
+            if (entity == "Employee")
+            {
+                Console.WriteLine("Id of requested employee: ");
+                int id = int.Parse(Console.ReadLine());
+                Employee result = rest.Get<Employee>(id, "employee");
+                if (result == null)
+                {
+                    Console.WriteLine("This employee does not exist.");
+                }
+                else
+                {
+                    Console.WriteLine(result.Id + "\t" + result.Name + "\t" + result.Salary + "\t" + result.DepartmentId);
+                }
+                Console.ReadLine();
+            }
+            if (entity == "Department")
+            {
+                    Console.WriteLine("Id of requested department: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Department result = rest.Get<Department>(id, "department");
+                    if (result == null)
+                    {
+                        Console.WriteLine("This employee does not exist.");
+                    }
+                    else
+                    {
+                        Console.WriteLine(result.Id + "\t" + result.Name + "\t" + result.Income + "\t" + result.Expenses + "\t" + result.LocationId);
+                    }
+                    Console.ReadLine();
+            }
+            if (entity == "Location")
+            {
+                    Console.WriteLine("Id of requested location: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Location result = rest.Get<Location>(id, "location");
+                    if (result == null)
+                    {
+                        Console.WriteLine("This employee does not exist.");;
+                    }
+                    else
+                    {
+                        Console.WriteLine(result.Name + "\t" + result.Address);
+                    }
+                    Console.ReadLine();
+            }
+        }
 
         static void Main(string[] args)
         {
             rest = new RestService("http://localhost:13109/", "Department");
 
             var employeeSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Read", () => Read("Employee"))
                 .Add("List", () => List("Employee"))
                 .Add("Create", () => Create("Employee"))
                 .Add("Delete", () => Delete("Employee"))
@@ -317,6 +366,7 @@ namespace FCW0VU_HFT_2023241.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var departmentSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Read", () => Read("Department"))
                 .Add("List", () => List("Department"))
                 .Add("Create", () => Create("Department"))
                 .Add("Delete", () => Delete("Department"))
@@ -324,6 +374,7 @@ namespace FCW0VU_HFT_2023241.Client
                 .Add("Exit", ConsoleMenu.Close);
 
             var locationSubMenu = new ConsoleMenu(args, level: 1)
+                .Add("Read", () => Read("Location"))
                 .Add("List", () => List("Location"))
                 .Add("Create", () => Create("Location"))
                 .Add("Delete", () => Delete("Location"))
