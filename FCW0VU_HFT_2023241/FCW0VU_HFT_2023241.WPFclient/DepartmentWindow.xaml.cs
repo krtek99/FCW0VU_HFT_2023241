@@ -10,31 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace FCW0VU_HFT_2023241.WPFclient
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DepartmentWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DepartmentWindow : Window
     {
-        public MainWindow()
+        public DepartmentWindow()
         {
             InitializeComponent();
-        }
-
-        private void Emp_Button_Click(object sender, RoutedEventArgs e)
-        {
-            EmployeeWindow asd = new EmployeeWindow();
-            asd.Show();
-        }
-
-        private void Dep_Button_Click(object sender, RoutedEventArgs e)
-        {
-            DepartmentWindow asd = new DepartmentWindow();
-            asd.Show();
         }
     }
 }
