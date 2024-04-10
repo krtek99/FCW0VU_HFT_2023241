@@ -36,5 +36,11 @@ namespace FCW0VU_HFT_2023241.WPFclient
             DepartmentWindow asd = new DepartmentWindow();
             asd.Show();
         }
+
+        private void Loc_Button_Click(object sender, RoutedEventArgs e)
+        {
+            LocationWindow asd = new LocationWindow();
+            asd.Show();
+        }
     }
 }

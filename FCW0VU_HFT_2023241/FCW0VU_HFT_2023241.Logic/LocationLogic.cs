@@ -23,7 +23,7 @@ namespace FCW0VU_HFT_2023241.Logic
         {
             if (item.Name.Length <= 0)
             {
-                throw new ArgumentException("The name can not be empty.");
+                throw new ArgumentException("The name cannot be empty.");
             }
             this.repo.Create(item);
         }

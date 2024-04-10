@@ -10,6 +10,7 @@
         <StackPanel>
             <Button Content="Employees" Click="Emp_Button_Click"/>
             <Button Content="Departmens" Click="Dep_Button_Click"/>
+            <Button Content="Locations" Click="Loc_Button_Click"/>
         </StackPanel>
     </Grid>
 </Window>
