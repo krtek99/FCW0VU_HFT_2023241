@@ -14,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FCW0VU_HFT_2023241.Endpoint.Services;
 
 namespace FCW0VU_HFT_2023241.Endpoint
 {
@@ -36,6 +37,8 @@ namespace FCW0VU_HFT_2023241.Endpoint
             services.AddTransient<IEmployeeLogic, EmployeeLogic>();
             services.AddTransient<IDepartmentLogic, DepartmentLogic>();
             services.AddTransient<ILocationLogic, LocationLogic>();
+
+            services.AddSignalR();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -63,6 +66,7 @@ namespace FCW0VU_HFT_2023241.Endpoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<SignalRHub>("/hub");
             });
         }
     }

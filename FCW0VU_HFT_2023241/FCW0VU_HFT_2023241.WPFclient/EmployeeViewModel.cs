@@ -45,7 +45,7 @@ namespace FCW0VU_HFT_2023241.WPFclient
         {
             if (!IsInDesignMode)
             {
-                Employees = new RestCollection<Employee>("http://localhost:13109/", "Employee");
+                Employees = new RestCollection<Employee>("http://localhost:13109/", "Employee", "hub");
 
                 CreateEmployeeCommand = new RelayCommand(() =>
                 {

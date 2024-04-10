@@ -45,7 +45,7 @@ namespace FCW0VU_HFT_2023241.WPFclient
         {
             if (!IsInDesignMode)
             {
-                Locations = new RestCollection<Location>("http://localhost:13109/", "Location");
+                Locations = new RestCollection<Location>("http://localhost:13109/", "Location", "hub");
 
                 CreateLocationCommand = new RelayCommand(() =>
                 {

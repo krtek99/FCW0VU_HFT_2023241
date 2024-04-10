@@ -47,7 +47,7 @@ namespace FCW0VU_HFT_2023241.WPFclient
         {
             if (!IsInDesignMode)
             {
-                Departments = new RestCollection<Department>("http://localhost:13109/", "Department");
+                Departments = new RestCollection<Department>("http://localhost:13109/", "Department", "hub");
 
                 CreateDepartmentCommand = new RelayCommand(() =>
                 {
